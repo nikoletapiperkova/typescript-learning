@@ -1,0 +1,61 @@
+What is a better approach - to use include and specify exactly which files we want to be compiled
+or to change the name of the rootdir and have them be stored in one place
+
+Depends on the structure of our project 
+But they shouldnt contradict 
+
+//rootdir - all of the files that get compiled
+must be located in this folder
+nothing outside of it gets to be compiled
+
+outdir specifies the directory in which all compiled files are emitted
+it respects the structure that we have declared in our project
+
+the target property is the version of javascript to which 
+typescript will be compiled 
+es2016 -js from 2016
+target: esnext - the newest most experimental version of js
+
+https://github.com/tsconfig/bases
+
+we have the recommended settings for each technology
+
+//why the module setting is not allowing us sometimes to run the code in browser vs node
+//it represents the way our files are connected in a project - our module system
+
+
+1. Why Node.js Code Fails in the Browser (CommonJS)
+The Problem: When configured for Node.js ("module": "commonjs"), 
+TypeScript compiles imports into require() statements (e.g., const app2 = require("./app2")).
+
+The Error: Browsers will throw Uncaught ReferenceError: require is not defined.
+
+The Reason: require() is a built-in Node.js function designed to read files
+ directly from the local hard drive. Due to security sandboxing,
+  web browsers do not have this capability or function.
+
+
+2. Why Native Browser Code Works (ES Modules)
+The Requirement: To run code natively in modern browsers (using <script type="module">), 
+you must use ES Modules ("module": "es6" or higher in tsconfig.json).
+
+The Behavior: TypeScript preserves the standard import syntax, 
+but requires explicit file extensions (e.g., import { Monkey } from "./app2.js").
+
+The Reason: Modern browsers natively understand these 
+import statements and can automatically fetch the required files from the server via HTTP.
+
+the lib: [] property
+react compiler options
+"lib": ["dom", "dom.iterable", "esnext"],
+
+if we declare it as empty we cant use the defaultly imported libraries
+
+//if we enable source maps we can debug the 
+typescript file in browser ourselves
+
+Source maps are special files that bridge the gap between the code you write 
+(TypeScript, modern JavaScript, SASS) and the code that actually runs in the browser 
+(minified, bundled, or compiled JavaScript/CSS).
+
+They are essentially a translation guide for your browser's developer tools.
