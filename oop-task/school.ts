@@ -53,12 +53,12 @@ class Student {
 
   public addGrade(subject: Subjects, grade: Grades): void {
     if (!this.subjectGrades[subject]) {
-      this.addSubject(subject);
+      this.subjectGrades[subject] = [];
     }
-    if (this.subjectGrades[subject]!.length >= MAX_GRADES_PER_SUBJECT) {
+    if (this.subjectGrades[subject].length >= MAX_GRADES_PER_SUBJECT) {
       console.log("Sorry too many grades");
     } else {
-      this.subjectGrades[subject]!.push(grade);
+      this.subjectGrades[subject].push(grade);
     }
   }
 }
